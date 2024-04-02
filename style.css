@@ -1,0 +1,15 @@
+/*Created by ItzSelenux*/
+#colored-box
+{width: 350px;height: 70px;padding: 10px;border: 2px solid black;display: flex;flex-wrap: wrap;}
+
+.letter
+{font-size: 0px;width: 12%;height: 50%;display: flex;justify-content: center;align-items: center;}
+
+.about
+{width: 60%}
+
+@media (prefers-color-scheme: dark)
+{
+body 
+{background-color: #1a1a1a;color:#a1a1a1;}
+}

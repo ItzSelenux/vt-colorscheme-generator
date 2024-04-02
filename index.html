@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--Created by ItzSelenux-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=2.0">
+	<title>Linux VT/TTY Colorscheme creator</title>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>
+	<h1>Make your VT/TTY eye-candy</h1>
+	<form id="colorForm">
+		<table>
+			<tr>
+				<th>Normal</th>
+				<td><input type="color" id="color0" onchange="createPreview()" value="#000000"></td>
+				<td><input type="color" id="color1" onchange="createPreview()" value="#aa0000"></td>
+				<td><input type="color" id="color2" onchange="createPreview()" value="#00aa00"></td>
+				<td><input type="color" id="color3" onchange="createPreview()" value="#aa5500"></td>
+				<td><input type="color" id="color4" onchange="createPreview()" value="#0000aa"></td>
+				<td><input type="color" id="color5" onchange="createPreview()" value="#aa00aa"></td>
+				<td><input type="color" id="color6" onchange="createPreview()" value="#00aaaa"></td>
+				<td><input type="color" id="color7" onchange="createPreview()" value="#aaaaaa"></td>
+			</tr>
+			<tr>
+				<th>Bright</th>
+				<td><input type="color" id="color8" onchange="createPreview()" value="#555555"></td>
+				<td><input type="color" id="color9" onchange="createPreview()" value="#ff5555"></td>
+				<td><input type="color" id="color10" onchange="createPreview()" value="#55ff55"></td>
+				<td><input type="color" id="color11" onchange="createPreview()" value="#ffff55"></td>
+				<td><input type="color" id="color12" onchange="createPreview()" value="#5555ff"></td>
+				<td><input type="color" id="color13" onchange="createPreview()" value="#ff55ff"></td>
+				<td><input type="color" id="color14" onchange="createPreview()" value="#55ffff"></td>
+				<td><input type="color" id="color15" onchange="createPreview()" value="#ffffff"></td>
+			</tr>
+		</table>
+   <label for="themeSelect">Choose a predefined theme:</label>
+	<select id="themeSelect" onchange="fillColors()">
+		<option value="default">Default</option>
+		<option value="dracula">Dracula</option>
+		<option value="gruvbox">Gruvbox Dark</option>
+		<option value="monokai">Monokai</option>
+		<option value="nord">Nord</option>
+		<option value="selenium">Selenium</option>
+		<option value="solarized_dark">Solarized Dark</option>
+		<option value="solarized_light">Solarized Light</option>
+		<option value="tokyo_night">Tokyo Night</option>
+	</select>
+	</form>
+	<button type="button" onclick="convertToVT()">Generate VT Colorscheme</button>
+	<div id="result"></div>
+	<h1>Preview:</h1>
+	
+	<div id="colored-box"></div>
+	<script>fillColors()</script>
+	<div class="about">
+		<hr color=#ffffff size="2.6" width="66%"><br>
+		<h2>What is this for?</h2>
+			<p>This is focused on users who see the VT (Virtual Terminal) constantly and are tired of seeing the black background with saturated colors. These users can see their favorite color scheme instead</p>
+		<hr color=#ffffff size="2.6" width="66%"><br>
+		<h2>How to install?</h2>
+			<p>Add the generated text as a kernel parameter. The method may vary depending on the bootloader., for example, for GRUB open <pre>/etc/default/grub</pre> and look for GRUB_CMDLINE_LINUX, next, append the generated text at the end to the GRUB_CMDLINE_LINUX string, and finally do <pre>grub-mkconfig -o /boot/grub/grub.cfg</pre> For more information, you can refer to <a href="https://wiki.archlinux.org/title/kernel_parameters">https://wiki.archlinux.org/title/kernel_parameters</a>
+		<hr color=#ffffff size="2.6" width="66%"><br>
+		<h2>I don't have root access :(</h2>
+			<p>In that case, you're limited to see the colorscheme only when you login on your shell, for example, using: <pre>printf "\033]P02a2a2a"</pre> or <pre>echo -en "\e]P02a2a2a"</pre> Would you like to generate a list of commands? (you need to add the list on your shell rc file (.bashrc on bash)) </a> <br>
+		<button type="button" onclick="generateColorList(0)">Generate list (echo)</button>
+		<button type="button" onclick="generateColorList(1)">Generate list (printf)</button>
+	</div>
+	<div id="list"></div>
+</center>
+</body>
+</html>
