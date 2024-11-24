@@ -97,7 +97,8 @@ function generateColorList(listtype) {
 function parseVT()
 {
 	const inputText = document.getElementById('vtInput').value;
-	const lines = inputText.split('\n');
+	const delimiter = inputText.includes('\n') ? '\n' : ' ';
+	const lines = inputText.split(delimiter);
 	const reds = lines.find(line => line.startsWith('vt.default_red')).split('=')[1].split(',');
 	const greens = lines.find(line => line.startsWith('vt.default_grn')).split('=')[1].split(',');
 	const blues = lines.find(line => line.startsWith('vt.default_blu')).split('=')[1].split(',');
