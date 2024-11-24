@@ -1,4 +1,4 @@
-//Created by ItzSelenux
+//Created by ItsZariep
 const themes =
 {
 	default: ["#000000", "#aa0000", "#00aa00", "#aa5500", "#0000aa", "#aa00aa", "#00aaaa", "#aaaaaa",
@@ -38,6 +38,16 @@ function createPreview()
 function fillColors()
 {
 	const theme = document.getElementById('themeSelect').value;
+
+	if (theme === "custom")
+	{
+		customInputContainer.style.display = 'block';
+	}
+	else
+	{
+		customInputContainer.style.display = 'none';
+	}
+
 	const colors = themes[theme];
 	if (colors)
 	{
@@ -83,3 +93,34 @@ function generateColorList(listtype) {
 	});
 	document.getElementById('list').textContent = colorString;
 }
+
+function parseVT()
+{
+	const inputText = document.getElementById('vtInput').value;
+	const lines = inputText.split('\n');
+	const reds = lines.find(line => line.startsWith('vt.default_red')).split('=')[1].split(',');
+	const greens = lines.find(line => line.startsWith('vt.default_grn')).split('=')[1].split(',');
+	const blues = lines.find(line => line.startsWith('vt.default_blu')).split('=')[1].split(',');
+
+	if (reds.length !== greens.length || greens.length !== blues.length)
+	{
+		alert('Error: Invalid format');
+		return;
+	}
+
+	reds.forEach((red, index) =>
+	{
+		const r = parseInt(red.trim(), 10).toString(16).padStart(2, '0');
+		const g = parseInt(greens[index].trim(), 10).toString(16).padStart(2, '0');
+		const b = parseInt(blues[index].trim(), 10).toString(16).padStart(2, '0');
+		const hexColor = `#${r}${g}${b}`;
+		const colorInput = document.getElementById('color' + index);
+		if (colorInput)
+		{
+			colorInput.value = hexColor;
+		}
+	});
+
+	createPreview();
+}
+

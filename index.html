@@ -11,6 +11,12 @@
 <body>
 <center>
 	<h1>Make your VT/TTY eye-candy</h1>
+
+	<div id="customInputContainer" style="display: none;">
+		<textarea id="vtInput" rows="5" cols="50" placeholder="vt.default_red=42,166,145,166,102,154,102,166,102,166,145,166,102,154,102,166 vt.default_grn=42,105,166,156,119,102,166,166,102,105,166,156,119,102,166,166 vt.default_blu=42,102,102,102,166,166,170,166,102,102,102,102,166,166,170,166"></textarea>
+		<br><button id="vtinputbtn" onclick="parseVT()">Import from VT</button>
+	</div>
+
 	<form id="colorForm">
 		<table>
 			<tr>
@@ -47,6 +53,7 @@
 		<option value="solarized_dark">Solarized Dark</option>
 		<option value="solarized_light">Solarized Light</option>
 		<option value="tokyo_night">Tokyo Night</option>
+		<option value="custom">Custom (Import from VT Format)</option>
 	</select>
 	</form>
 	<button type="button" onclick="convertToVT()">Generate VT Colorscheme</button>
